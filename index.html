@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullStyle</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Botones de login/register en header */
+        #auth-buttons {
+            position: absolute;
+            top: 28px;
+            right: 200px;
+            display: flex;
+            gap: 12px;
+            z-index: 30;
+        }
+        #auth-buttons button {
+           background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+            border: none;
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #auth-buttons button:last-child {
+         background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+        }
+        #auth-buttons button:hover {
+            filter: brightness(1.1);
+        }
+        /* Mueve el carrito un poco hacia la izquierda */
+        #cart-icon {
+            position: absolute;
+            top: 28px;
+            right: 140px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 30;
+        }
+        /* Elimina el fondo */
+        body {
+            /* background: url('img/tu-fondo.jpg') no-repeat center center fixed;
+            background-size: cover; */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenidos a FullStyle</h1>
+        <div id="user-info" style="display:none;">
+            <span id="user-name" class="user-name"></span>
+            <div id="user-menu" class="user-menu">
+                <ul>
+                    <li><span id="account-info">Información de cuenta</span></li>
+                    <li><span id="logout-menu-btn">Cerrar sesión</span></li>
+                </ul>
+            </div>
+        </div>
+        <div id="auth-buttons">
+            <button id="go-login">Iniciar sesión</button>
+            <button id="go-register">Registrarse</button>
+        </div>
+        <div id="cart-icon">
+            <img src="img/car.svg" alt="Carrito" style="width:32px;cursor:pointer;">
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+    <main>
+        <!-- Catálogo visible por defecto -->
+        <section id="products-section" style="display:block;">
+            <h2>Catálogo</h2>
+            <div class="catalog-layout">
+                <nav class="catalog-menu-vertical">
+                    <ul>
+                        <li>
+                            <button class="catalog-main-btn" data-catalog="all">Toda la ropa</button>
+                        </li>
+                        <li>
+                            <button class="catalog-main-btn" data-catalog="shirts">Camisas</button>
+                        </li>
+                        <li>
+                            <button class="catalog-main-btn" data-catalog="sweaters">Suéteres</button>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="catalog-content" class="catalog-content">
+                    <!-- Toda la ropa -->
+                    <div class="catalog-group" data-catalog="all">
+                        <h3>Toda la ropa</h3>
+                        <div class="products-grid">
+                            <!-- Camisas -->
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK BACK.png" alt="Camisa Clásica">
+                                <h3>Camisa Clásica</h3>
+                                <p>$20.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK BACK (Minecraft).png" alt="Camisa Minecraft">
+                                <h3>Camisa Minecraft</h3>
+                                <p>$22.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK FRONT.png" alt="Camisa Negra Frente">
+                                <h3>Camisa Negra Frente</h3>
+                                <p>$20.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/WHITE_FRONT.png" alt="Camisa Blanca">
+                                <h3>Camisa Blanca</h3>
+                                <p>$18.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <!-- Suéteres -->
+                            <div class="product-card">
+                                <img src="img/sueters/BLACK HEAVYWEIGHT HOODIE FRONT.png" alt="Suéter Cómodo">
+                                <h3>Suéter Cómodo</h3>
+                                <p>$35.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/hoodie.jpg" alt="Hoodie">
+                                <h3>Hoodie</h3>
+                                <p>$30.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Solo camisas -->
+                    <div class="catalog-group" data-catalog="shirts" style="display:none;">
+                        <h3>Camisas</h3>
+                        <div class="products-grid">
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK BACK.png" alt="Camisa Clásica">
+                                <h3>Camisa Clásica</h3>
+                                <p>$20.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK BACK (Minecraft).png" alt="Camisa Minecraft">
+                                <h3>Camisa Minecraft</h3>
+                                <p>$22.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/BLACK FRONT.png" alt="Camisa Negra Frente">
+                                <h3>Camisa Negra Frente</h3>
+                                <p>$20.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/camisas/WHITE_FRONT.png" alt="Camisa Blanca">
+                                <h3>Camisa Blanca</h3>
+                                <p>$18.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Solo suéteres -->
+                    <div class="catalog-group" data-catalog="sweaters" style="display:none;">
+                        <h3>Suéteres</h3>
+                        <div class="products-grid">
+                            <div class="product-card">
+                                <img src="img/sueters/BLACK HEAVYWEIGHT HOODIE FRONT.png" alt="Suéter Cómodo">
+                                <h3>Suéter Cómodo</h3>
+                                <p>$35.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                            <div class="product-card">
+                                <img src="img/sueters/WhatsApp Image 2025-06-08 at 10.04.28 AM.jpeg" alt="Hoodie">
+                                <h3>Hoodie</h3>
+                                <p>$30.00</p>
+                                <button>Añadir al carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Login y registro ocultos al inicio -->
+        <section id="login-section" style="display:none;">
+            <button id="back-to-store-login" style="margin-bottom:18px;background:#222;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1rem;font-weight:600;cursor:pointer;">
+        &larr; Volver a la tienda
+    </button>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-user">Correo o usuario:</label>
+                <input type="text" id="login-user" name="login-user" required>
+                <label for="login-password">Contraseña:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <button type="submit">Inicia</button>
+            </form>
+            <p>¿No tienes cuenta? <a href="#" id="show-register">Regístrate aquí</a></p>
+            <p id="welcome-message"></p>
+        </section>
+        <section id="register-section" style="display:none;">
+            <button id="back-to-store-register" style="margin-bottom:18px;background:#222;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:1rem;font-weight:600;cursor:pointer;">
+        &larr; Volver a la tienda
+    </button>
+            <h2>Regístrate</h2>
+            <form id="register-form">
+                <label for="register-email">Correo electrónico:</label>
+                <input type="email" id="register-email" name="register-email" required>
+                <label for="register-username">Nombre de usuario:</label>
+                <input type="text" id="register-username" name="register-username" required>
+                <label for="register-birthdate">Fecha de nacimiento:</label>
+                <input type="date" id="register-birthdate" name="register-birthdate" required>
+                <label for="register-password">Contraseña:</label>
+                <input type="password" id="register-password" name="register-password" required>
+                <label for="register-password2">Confirmar contraseña:</label>
+                <input type="password" id="register-password2" name="register-password2" required>
+                <button type="submit">Registrate</button>
+            </form>
+            <p>¿Ya tienes cuenta? <a href="#" id="show-login">Ingresa a tu cuenta aquí</a></p>
+        </section>
+    </main>
+    <div id="product-modal" class="modal" style="display:none;">
+        <div class="modal-content" id="product-modal-content"></div>
+    </div>
+    <div id="cart-modal" class="modal" style="display:none;">
+        <div class="modal-content" id="cart-modal-content"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    // Mostrar login o registro desde los botones del header
+    document.getElementById('go-login').onclick = function() {
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('login-section').style.display = 'block';
+        document.getElementById('register-section').style.display = 'none';
+    };
+    document.getElementById('go-register').onclick = function() {
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('register-section').style.display = 'block';
+        document.getElementById('login-section').style.display = 'none';
+    };
+    // Mostrar catálogo al cerrar sesión o al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!sessionStorage.getItem('userName')) {
+            document.getElementById('products-section').style.display = 'block';
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('register-section').style.display = 'none';
+        }
+
+        // Botón volver en login
+        var backLogin = document.getElementById('back-to-store-login');
+        if (backLogin) {
+            backLogin.onclick = function() {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('products-section').style.display = 'block';
+            };
+        }
+
+        // Botón volver en registro
+        var backRegister = document.getElementById('back-to-store-register');
+        if (backRegister) {
+            backRegister.onclick = function() {
+                document.getElementById('register-section').style.display = 'none';
+                document.getElementById('products-section').style.display = 'block';
+            };
+        }
+    });
+    </script>
+</body>
+</html>

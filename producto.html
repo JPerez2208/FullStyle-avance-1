@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Producto - FullStyle</title>
+   <link rel="stylesheet" href="style.css">
+    <style>
+        .product-detail-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 900px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            padding: 32px 24px;
+            position: relative;
+        }
+        .product-detail-image {
+            flex: 1 1 320px;
+            min-width: 280px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-detail-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(53,66,74,0.10);
+        }
+        .product-detail-info {
+            flex: 2 1 320px;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .back-btn {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            background:rgb(255, 255, 255);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            z-index: 2;
+        }
+        .back-btn:hover {
+            background:rgb(255, 255, 255);
+        }
+        .size-btn {
+            margin-bottom: 0;
+        }
+        @media (max-width: 900px) {
+            .product-detail-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .back-btn {
+                left: 12px;
+                top: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FullStyle</h1>
+       <div id="cart-icon">
+            <img src="img/car.svg" alt="Carrito" style="width:32px;cursor:pointer;">
+            <span id="cart-count">0</span>
+        </div>
+        </div>
+    </header>
+    <main>
+        <section id="product-detail"></section>
+    </main>
+    <div id="cart-modal" class="modal" style="display:none;">
+        <div class="modal-content" id="cart-modal-content"></div>
+    </div>
+    <script>
+    // --- PRODUCT DATA ---
+    const products = [
+        {
+            id: 1,
+            name: "Camisa Clásica",
+            image: "img/camisas/BLACK BACK.png",
+            price: 20,
+            sizes: ["S", "M", "L", "XL"],
+            details: "Camisa de algodón con estampado exclusivo. Ideal para cualquier ocasión."
+        },
+        {
+            id: 2,
+            name: "Suéter Cómodo",
+            image: "img/sweater.jpg",
+            price: 35,
+            sizes: ["M", "L", "XL"],
+            details: "Suéter suave y abrigador, perfecto para el invierno."
+        },
+        {
+            id: 3,
+            name: "Playera Casual",
+            image: "img/tshirt.jpg",
+            price: 15,
+            sizes: ["S", "M", "L"],
+            details: "Playera ligera y cómoda para el día a día."
+        },
+        {
+            id: 4,
+            name: "Hoodie",
+            image: "img/hoodie.jpg",
+            price: 30,
+            sizes: ["S", "M", "L", "XL"],
+            details: "Hoodie moderno con capucha y bolsillo frontal."
+        }
+    ];
+
+    // --- GET PRODUCT ID ---
+    function getProductId() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('id'));
+    }
+
+    // --- RENDER PRODUCT DETAIL ---
+    function renderProductDetail() {
+        const id = getProductId();
+        const prod = products.find(p => p.id === id);
+        const section = document.getElementById('product-detail');
+        if (!prod) {
+            section.innerHTML = '<p>Producto no encontrado.</p>';
+            return;
+        }
+        let sizeBtns = prod.sizes.map(s => `<button class="size-btn" data-size="${s}">${s}</button>`).join('');
+        section.innerHTML = `
+            <div class="product-detail-container">
+                <button class="back-btn" id="back-btn">&larr; Volver</button>
+                <div class="product-detail-image">
+                    <img src="${prod.image}" alt="${prod.name}">
+                </div>
+                <div class="product-detail-info">
+                    <h2>${prod.name}</h2>
+                    <p style="font-size:1.3rem;color:#45a049;"><b>Precio:</b> $${prod.price.toFixed(2)}</p>
+                    <div style="margin:14px 0 10px 0;"><b>Tallas:</b> <span id="sizes">${sizeBtns}</span></div>
+                    <p style="margin-top:10px;"><b>Detalles:</b> ${prod.details}</p>
+                    <button id="add-to-cart-btn" style="margin-top:22px;font-size:1.1rem;">Agregar al carrito</button>
+                </div>
+            </div>
+        `;
+
+        // Botón volver
+        document.getElementById('back-btn').onclick = () => window.history.length > 1 ? window.history.back() : window.location.href = "index.html";
+
+        // Selección de talla
+        let selectedSize = null;
+        section.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                section.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedSize = btn.getAttribute('data-size');
+            });
+        });
+
+        // Agregar al carrito
+        document.getElementById('add-to-cart-btn').onclick = function() {
+            if (!selectedSize) {
+                alert('Selecciona una talla.');
+                return;
+            }
+            addToCart(prod, selectedSize);
+            alert('Producto añadido al carrito');
+        };
+    }
+    renderProductDetail();
+
+    // --- CARRITO ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    function updateCartCount() {
+        document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.qty, 0);
+    }
+    function addToCart(product, size) {
+        const idx = cart.findIndex(item => item.id === product.id && item.size === size);
+        if (idx > -1) {
+            cart[idx].qty += 1;
+        } else {
+            cart.push({ id: product.id, name: product.name, price: product.price, size, qty: 1, image: product.image });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+    }
+    updateCartCount();
+
+    // --- MODAL CARRITO ---
+    document.getElementById('cart-icon').onclick = function() {
+        window.location.href = "carrito.html";
+    };
+    function openCartModal() {
+        const modal = document.getElementById('cart-modal');
+        const content = document.getElementById('cart-modal-content');
+        if (cart.length === 0) {
+            content.innerHTML = `<span class="modal-close" id="close-cart-modal">&times;</span>
+            <h2>Carrito</h2><p>Tu carrito está vacío.</p>`;
+        } else {
+            let items = cart.map((item, i) => `
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                    <img src="${item.image}" alt="${item.name}" style="width:50px;border-radius:6px;">
+                    <div>
+                        <b>${item.name}</b> <br>
+                        Talla: ${item.size} <br>
+                        $${item.price.toFixed(2)} x ${item.qty}
+                    </div>
+                    <button style="margin-left:auto;" onclick="removeFromCart(${i})">Eliminar</button>
+                </div>
+            `).join('');
+            let total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+            content.innerHTML = `
+                <span class="modal-close" id="close-cart-modal">&times;</span>
+                <h2>Carrito</h2>
+                ${items}
+                <hr>
+                <b>Total: $${total.toFixed(2)}</b>
+                <button id="pay-btn" style="margin-top:16px;width:100%;">Pagar</button>
+            `;
+        }
+        modal.style.display = 'flex';
+        document.getElementById('close-cart-modal').onclick = () => modal.style.display = 'none';
+        modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+        // Pago simulado
+        const payBtn = document.getElementById('pay-btn');
+        if (payBtn) {
+            payBtn.onclick = function() {
+                alert('¡Gracias por tu compra!');
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                modal.style.display = 'none';
+            };
+        }
+    }
+    // Eliminar del carrito (global para inline onclick)
+    window.removeFromCart = function(idx) {
+        cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        openCartModal();
+    };
+    </script>
+
+    <!-- Ejemplo de detalle de producto para cada uno, copia y pega este bloque en producto.html y cambia el id en la URL para cada producto -->
+
+    <!-- Camisa Clásica -->
+    <section id="product-detail-camisa-clasica">
+        <div class="product-detail-container">
+            <button class="back-btn" onclick="window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';">&larr; Volver</button>
+            <div class="product-detail-image">
+                <img src="img/camisas/BLACK BACK.png" alt="Camisa Clásica">
+            </div>
+            <div class="product-detail-info">
+                <h2>Camisa Clásica</h2>
+                <p style="font-size:1.3rem;color:#45a049;"><b>Precio:</b> $20.00</p>
+                <div style="margin:14px 0 10px 0;"><b>Tallas:</b> <span>S, M, L, XL</span></div>
+                <p style="margin-top:10px;"><b>Detalles:</b> Camisa de algodón con estampado exclusivo. Ideal para cualquier ocasión.</p>
+                <button style="margin-top:22px;font-size:1.1rem;">Agregar al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suéter Cómodo -->
+    <section id="product-detail-sueter-comodo">
+        <div class="product-detail-container">
+            <button class="back-btn" onclick="window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';">&larr; Volver</button>
+            <div class="product-detail-image">
+                <img src="img/sweater.jpg" alt="Suéter Cómodo">
+            </div>
+            <div class="product-detail-info">
+                <h2>Suéter Cómodo</h2>
+                <p style="font-size:1.3rem;color:#45a049;"><b>Precio:</b> $35.00</p>
+                <div style="margin:14px 0 10px 0;"><b>Tallas:</b> <span>M, L, XL</span></div>
+                <p style="margin-top:10px;"><b>Detalles:</b> Suéter suave y abrigador, perfecto para el invierno.</p>
+                <button style="margin-top:22px;font-size:1.1rem;">Agregar al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playera Casual -->
+    <section id="product-detail-playera-casual">
+        <div class="product-detail-container">
+            <button class="back-btn" onclick="window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';">&larr; Volver</button>
+            <div class="product-detail-image">
+                <img src="img/tshirt.jpg" alt="Playera Casual">
+            </div>
+            <div class="product-detail-info">
+                <h2>Playera Casual</h2>
+                <p style="font-size:1.3rem;color:#45a049;"><b>Precio:</b> $15.00</p>
+                <div style="margin:14px 0 10px 0;"><b>Tallas:</b> <span>S, M, L</span></div>
+                <p style="margin-top:10px;"><b>Detalles:</b> Playera ligera y cómoda para el día a día.</p>
+                <button style="margin-top:22px;font-size:1.1rem;">Agregar al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hoodie -->
+    <section id="product-detail-hoodie">
+        <div class="product-detail-container">
+            <button class="back-btn" onclick="window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';">&larr; Volver</button>
+            <div class="product-detail-image">
+                <img src="img/hoodie.jpg" alt="Hoodie">
+            </div>
+            <div class="product-detail-info">
+                <h2>Hoodie</h2>
+                <p style="font-size:1.3rem;color:#45a049;"><b>Precio:</b> $30.00</p>
+                <div style="margin:14px 0 10px 0;"><b>Tallas:</b> <span>S, M, L, XL</span></div>
+                <p style="margin-top:10px;"><b>Detalles:</b> Hoodie moderno con capucha y bolsillo frontal.</p>
+                <button style="margin-top:22px;font-size:1.1rem;">Agregar al carrito</button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

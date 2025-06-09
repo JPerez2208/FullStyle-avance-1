@@ -1,0 +1,655 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23595959' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23555555'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+ 
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 32px 0 16px 0;
+   background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(87, 102, 199, 1) 50%, rgba(237, 221, 83, 1) 100%);
+    color: #5fa2e0;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+#user-info {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    z-index: 20;
+}
+
+/* Cart icon */
+#cart-icon {
+    position: absolute;
+    top: 24px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    z-index: 21;
+    cursor: pointer;
+}
+
+#cart-count {
+    background: #e53e3e;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    margin-left: -12px;
+    margin-top: -18px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Main layout */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+/* Login y registro */
+#login-section, #register-section {
+    background: linear-gradient(135deg, #3c018f 0%, #000 100%);
+    padding: 32px 28px 24px 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.1);
+    min-width: 320px;
+    max-width: 90vw;
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+#login-section:hover, #register-section:hover {
+    box-shadow: 0 8px 32px rgba(53,66,74,0.16);
+}
+
+#login-section h2, #register-section h2 {
+    margin-bottom: 18px;
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+#login-form, #register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}
+
+#login-form label, #register-form label {
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+#login-form input, #register-form input {
+    padding: 10px 12px;
+    border: 1.5px solid #bfc9d1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    background: #f4f7fa;
+    color: #fff !important;
+    background: transparent !important;
+}
+
+/* Placeholders blancos */
+#login-form input::placeholder,
+#register-form input::placeholder {
+    color: #fff !important;
+    opacity: 1;
+}
+
+/* Cuando el input tiene valor (no está vacío): fondo blanco y texto negro */
+#login-form input:not(:placeholder-shown),
+#register-form input:not(:placeholder-shown) {
+    background: #fff !important;
+    color: #111 !important;
+}
+
+/* También al enfocar, si tiene valor, mantener fondo blanco y texto negro */
+#login-form input:focus:not(:placeholder-shown),
+#register-form input:focus:not(:placeholder-shown) {
+    background: #fff !important;
+    color: #111 !important;
+}
+
+#login-form button, #register-form button {
+    background: linear-gradient(90deg, #35424a 60%, #45a049 100%);
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+/* Botones de login y registro: texto blanco */
+#login-form button, #register-form button {
+    color: #fff !important;
+}
+
+#login-form button:hover, #register-form button:hover {
+    background: linear-gradient(90deg, #45a049 60%, #35424a 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+
+#login-section p, #register-section p {
+    margin-top: 14px;
+    font-size: 1rem;
+    color: #35424a;
+}
+
+#login-section a, #register-section a {
+    color: #6769ff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#login-section a:hover, #register-section a:hover {
+    color: #ffffff;
+}
+
+#welcome-message {
+    margin-top: 18px;
+    color: #487d86;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Productos */
+#products-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#products-section h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+#logout-btn {
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+#logout-btn:hover {
+    background: #c53030;
+    transform: scale(1.04);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+.product-card {
+    background: #727272;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(102, 78, 129, 0.993);
+    padding: 18px 12px 20px 12px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 32px rgb(241, 250, 255);
+    transform: translateY(-3px) scale(1.03);
+}
+
+.product-card img {
+    width: 100%;
+    max-width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgb(212, 218, 221);
+}
+
+.product-card h3 {
+    margin: 12px 0 8px 0;
+    font-size: 1.2rem;
+    color: #35424a;
+    font-weight: 600;
+}
+
+.product-card p {
+    color: #8aadee;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.product-card button {
+    background: linear-gradient(90deg, #5259c0 60%, #35424a 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.product-card button:hover {
+    background: linear-gradient(90deg, #35424a 60%, #5945a0 100%);
+    transform: scale(1.05);
+}
+
+/* User menu */
+.user-name {
+   background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 0;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.user-name:hover {
+    background: #3075a0;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 48px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(53,66,74,0.13);
+    min-width: 180px;
+    z-index: 10;
+    padding: 0;
+}
+
+.user-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.user-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #35424a;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.user-menu li:hover {
+    background: #e0e7ff;
+}
+
+/* Modal */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 24px;
+    min-width: 320px;
+    max-width: 95vw;
+    box-shadow: 0 8px 32px rgba(53,66,74,0.18);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.5rem;
+    color: #e53e3e;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Size buttons */
+.size-btn {
+    background: #f4f7fa;
+    border: 1.5px solid #bfc9d1;
+    border-radius: 6px;
+    padding: 6px 16px;
+    margin: 0 4px 8px 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, border 0.2s;
+}
+
+.size-btn.selected, .size-btn:hover {
+     background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+    border: 2px solid #35424a;
+}
+
+/* Catalog */
+.catalog-group {
+    margin-bottom: 36px;
+}
+.catalog-group h3 {
+    color: #35424a;
+    margin-bottom: 12px;
+    margin-top: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.catalog-menu {
+    margin-bottom: 24px;
+    text-align: center;
+}
+.catalog-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 18px;
+}
+.catalog-menu li {
+    display: inline;
+}
+.catalog-main-btn {
+    width: 100%;
+    background: #845bc5;
+    color: #35424a;
+    border: 1.5px solid #222222;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+    outline: none;
+}
+.catalog-main-btn.active,
+.catalog-main-btn:hover {
+      background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+    border: 2px solid #000000;
+    transform: translateX(8px) scale(1.04);
+}
+
+/* Catalog layout */
+.catalog-layout {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    min-height: 500px;
+    margin: 0;           /* Elimina el auto centrado */
+    gap: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.catalog-menu-vertical {
+    min-width: 180px;
+      background: #3c018f;
+background: linear-gradient(90deg, rgba(60, 1, 143, 1) 0%, rgba(134, 87, 199, 1) 72%, rgba(119, 83, 237, 1) 100%);
+    border-radius: 0 14px 14px 0; /* Solo borde derecho redondeado */
+    box-shadow: 2px 0 12px rgb(0, 0, 0);
+    padding: 32px 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    animation: slideInLeft 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    margin-left: 0;      /* Sin margen izquierdo */
+    position: fixed;     /* Fija el menú a la izquierda */
+    left: 0;
+    top: 120px;          /* Ajusta según la altura de tu header */
+    height: calc(100vh - 120px);
+    z-index: 100;
+}
+
+.catalog-content {
+    flex: 1;
+    padding: 32px 24px;
+    animation: fadeIn 0.7s;
+    margin-left: 180px; /* Deja espacio para el menú fijo */
+}
+@keyframes slideInLeft {
+    from { transform: translateX(-80px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 10px;
+    }
+    #login-section, #register-section {
+        min-width: unset;
+        padding: 18px 6vw 18px 6vw;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    #products-section {
+        padding: 10px 0 0 0;
+    }
+    .product-card img {
+        max-width: 100%;
+        height: 140px;
+    }
+}
+
+/* Cambia todo el texto a blanco */
+body,
+header,
+header h1,
+#user-info,
+#user-info *,
+#cart-icon,
+#cart-count,
+main,
+#login-section,
+#register-section,
+#login-section *,
+#register-section *,
+#products-section,
+#products-section *,
+.catalog-group h3,
+.catalog-main-btn,
+.catalog-main-btn.active,
+.catalog-main-btn:hover,
+.product-card,
+.product-card *,
+.user-name,
+.user-menu,
+.user-menu *,
+.modal-content,
+.size-btn,
+.size-btn.selected,
+.size-btn:hover,
+label,
+input,
+select,
+option,
+button {
+    color: #000000 !important;
+}
+
+/* Ajusta campos de entrada para que el texto también sea blanco */
+input, select, textarea {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Ajusta los placeholders a blanco */
+input::placeholder, textarea::placeholder {
+    color: #fff !important;
+    opacity: 1;
+}
+
+/* EXCEPCIÓN: Login y registro mantienen su color original */
+#login-section,
+#register-section,
+#login-section *,
+#register-section *,
+#login-form label,
+#register-form label,
+#login-form input,
+#register-form input,
+#login-form button,
+#register-form button,
+#login-section p,
+#register-section p,
+#login-section a,
+#register-section a {
+    color: #ffffff !important;
+    background: none !important;
+}
+
+/* Cambia el color de los botones de registrar e iniciar sesión */
+#auth-buttons button {
+    background: linear-gradient(90deg, #e53e3e 60%, #fbbf24 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#auth-buttons button:last-child {
+    background: linear-gradient(90deg, #2563eb 60%, #10b981 100%);
+}
+
+#auth-buttons button:hover {
+    filter: brightness(1.15);
+}
+
+/* Cambia el color del texto del menú de pagos del carrito a negro */
+/* --- REVERTIR CAMBIOS EN EL CARRITO Y FORMULARIO DE PAGO --- */
+.cart-container {
+    background: #111 !important;
+    color: #fff !important;
+}
+
+.cart-container h2,
+.cart-total,
+.cart-item-info,
+.cart-item-info b,
+.cart-item-info span,
+.cart-item {
+    color: #fff !important;
+}
+
+.payment-form label {
+    color: #fff !important;
+}
+
+.payment-form input,
+.payment-form select {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1.5px solid #bfc9d1;
+}
+
+.payment-form input::placeholder {
+    color: #fff !important;
+    opacity: 1;
+}
+
+.payment-form button {
+    background: rgb(150, 93, 197);
+    color: #fff !important;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.payment-form button:hover {
+    background: #35424a;
+}
